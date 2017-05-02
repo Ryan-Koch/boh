@@ -8,8 +8,12 @@ with open('copy.csv', 'rb') as copy_csvfile: # using open function, open the CSV
     copy_inventory = {row['Campaign_Number']: int(row['Available_Issue']) for row in copy_reader if int(row['Available_Issue'])}
 
 for item_number in master_inventory:
-    if abs(master_inventory[item_number] - copy_inventory[item_number]) > 500:
-        print 'Item {} - master count: {}, copy count:{}'.format(item_number, master_inventory[item_number], copy_inventory[Campaign_Number])
+    #print copy_inventory
+    try:
+        if abs(master_inventory[item_number] - copy_inventory[item_number]) > 500:
+            print 'Item {} - master count: {}, copy count:{}'.format(item_number, master_inventory[item_number], copy_inventory[item_number])
+    except KeyError, e:
+    	print "Missing data for {}".format(e)
 
 # master_inventory = {}
 # for row in spamreader:
